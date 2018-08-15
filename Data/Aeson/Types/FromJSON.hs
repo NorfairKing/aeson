@@ -99,6 +99,7 @@ import Data.Semigroup ((<>))
 import Data.Proxy (Proxy(..))
 import Data.Ratio ((%), Ratio)
 import Data.Scientific (Scientific, base10Exponent)
+import Data.Scientific.Unsafe (unsafeScientificToFrac)
 import Data.Tagged (Tagged(..))
 import Data.Text (Text, pack, unpack)
 import Data.Time (Day, DiffTime, LocalTime, NominalDiffTime, TimeOfDay, UTCTime, ZonedTime)
@@ -1271,7 +1272,7 @@ instance (FromJSON a, Integral a) => FromJSON (Ratio a) where
 -- newtype 'Scientific' and provide your own instance using
 -- 'withScientific' if you want to allow larger inputs.
 instance HasResolution a => FromJSON (Fixed a) where
-    parseJSON = withBoundedScientific "Fixed" $ pure . realToFrac
+    parseJSON = withBoundedScientific "Fixed" $ pure . unsafeScientificToFrac
     {-# INLINE parseJSON #-}
 
 instance FromJSON Int where
@@ -1728,7 +1729,7 @@ instance FromJSONKey UTCTime where
 -- newtype 'Scientific' and provide your own instance using
 -- 'withScientific' if you want to allow larger inputs.
 instance FromJSON NominalDiffTime where
-    parseJSON = withBoundedScientific "NominalDiffTime" $ pure . realToFrac
+    parseJSON = withBoundedScientific "NominalDiffTime" $ pure . unsafeScientificToFrac
     {-# INLINE parseJSON #-}
 
 
@@ -1737,7 +1738,7 @@ instance FromJSON NominalDiffTime where
 -- newtype 'Scientific' and provide your own instance using
 -- 'withScientific' if you want to allow larger inputs.
 instance FromJSON DiffTime where
-    parseJSON = withBoundedScientific "DiffTime" $ pure . realToFrac
+    parseJSON = withBoundedScientific "DiffTime" $ pure . unsafeScientificToFrac
     {-# INLINE parseJSON #-}
 
 -------------------------------------------------------------------------------

@@ -83,7 +83,8 @@ import Data.List.NonEmpty (NonEmpty(..))
 import Data.Semigroup ((<>))
 import Data.Proxy (Proxy(..))
 import Data.Ratio (Ratio, denominator, numerator)
-import Data.Scientific (Scientific)
+import Data.Scientific (Scientific, fromIntegerScientific, fromIntegralScientific)
+import Data.Scientific.Unsafe (unsafeRealToScientific)
 import Data.Tagged (Tagged(..))
 import Data.Text (Text, pack)
 import Data.Time (Day, DiffTime, LocalTime, NominalDiffTime, TimeOfDay, UTCTime, ZonedTime)
@@ -1312,19 +1313,19 @@ instance (ToJSON a, Integral a) => ToJSON (Ratio a) where
 
 
 instance HasResolution a => ToJSON (Fixed a) where
-    toJSON = Number . realToFrac
+    toJSON = Number . unsafeRealToScientific
     {-# INLINE toJSON #-}
 
-    toEncoding = E.scientific . realToFrac
+    toEncoding = E.scientific . unsafeRealToScientific
     {-# INLINE toEncoding #-}
 
 instance HasResolution a => ToJSONKey (Fixed a) where
-    toJSONKey = toJSONKeyTextEnc (E.scientificText . realToFrac)
+    toJSONKey = toJSONKeyTextEnc (E.scientificText . unsafeRealToScientific)
     {-# INLINE toJSONKey #-}
 
 
 instance ToJSON Int where
-    toJSON = Number . fromIntegral
+    toJSON = Number . fromIntegralScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.int
@@ -1336,7 +1337,7 @@ instance ToJSONKey Int where
 
 
 instance ToJSON Integer where
-    toJSON = Number . fromInteger
+    toJSON = Number . fromIntegerScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.integer
@@ -1360,7 +1361,7 @@ instance ToJSONKey Natural where
 
 
 instance ToJSON Int8 where
-    toJSON = Number . fromIntegral
+    toJSON = Number . fromIntegralScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.int8
@@ -1372,7 +1373,7 @@ instance ToJSONKey Int8 where
 
 
 instance ToJSON Int16 where
-    toJSON = Number . fromIntegral
+    toJSON = Number . fromIntegralScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.int16
@@ -1384,7 +1385,7 @@ instance ToJSONKey Int16 where
 
 
 instance ToJSON Int32 where
-    toJSON = Number . fromIntegral
+    toJSON = Number . fromIntegralScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.int32
@@ -1396,7 +1397,7 @@ instance ToJSONKey Int32 where
 
 
 instance ToJSON Int64 where
-    toJSON = Number . fromIntegral
+    toJSON = Number . fromIntegralScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.int64
@@ -1407,7 +1408,7 @@ instance ToJSONKey Int64 where
     {-# INLINE toJSONKey #-}
 
 instance ToJSON Word where
-    toJSON = Number . fromIntegral
+    toJSON = Number . fromIntegralScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.word
@@ -1419,7 +1420,7 @@ instance ToJSONKey Word where
 
 
 instance ToJSON Word8 where
-    toJSON = Number . fromIntegral
+    toJSON = Number . fromIntegralScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.word8
@@ -1431,7 +1432,7 @@ instance ToJSONKey Word8 where
 
 
 instance ToJSON Word16 where
-    toJSON = Number . fromIntegral
+    toJSON = Number . fromIntegralScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.word16
@@ -1443,7 +1444,7 @@ instance ToJSONKey Word16 where
 
 
 instance ToJSON Word32 where
-    toJSON = Number . fromIntegral
+    toJSON = Number . fromIntegralScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.word32
@@ -1455,7 +1456,7 @@ instance ToJSONKey Word32 where
 
 
 instance ToJSON Word64 where
-    toJSON = Number . fromIntegral
+    toJSON = Number . fromIntegralScientific
     {-# INLINE toJSON #-}
 
     toEncoding = E.word64
@@ -1958,18 +1959,18 @@ stringEncoding = String
 
 
 instance ToJSON NominalDiffTime where
-    toJSON = Number . realToFrac
+    toJSON = Number . unsafeRealToScientific
     {-# INLINE toJSON #-}
 
-    toEncoding = E.scientific . realToFrac
+    toEncoding = E.scientific . unsafeRealToScientific
     {-# INLINE toEncoding #-}
 
 
 instance ToJSON DiffTime where
-    toJSON = Number . realToFrac
+    toJSON = Number . unsafeRealToScientific
     {-# INLINE toJSON #-}
 
-    toEncoding = E.scientific . realToFrac
+    toEncoding = E.scientific . unsafeRealToScientific
     {-# INLINE toEncoding #-}
 
 -------------------------------------------------------------------------------

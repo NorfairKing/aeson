@@ -29,7 +29,7 @@ import Data.Functor.Product (Product(..))
 import Data.Functor.Sum (Sum(..))
 import Data.List.NonEmpty (NonEmpty(..))
 import Data.Proxy (Proxy(..))
-import Data.Scientific (Scientific)
+import Data.Scientific (Scientific, scientific)
 import Data.Tagged (Tagged(..))
 import Data.Time (fromGregorian)
 import Data.Word (Word8)
@@ -109,7 +109,7 @@ jsonExamples =
 
   , example "Float" "3.14" (3.14 :: Float)
   , example "Pico" "3.14" (3.14 :: Pico)
-  , example "Scientific" "3.14" (3.14 :: Scientific)
+  , example "Scientific" "3.14" (scientific 314 (-2) :: Scientific)
 
   , example "UUID" "\"c2cc10e1-57d6-4b6f-9899-38d972112d8c\"" $ UUID.fromWords
       0xc2cc10e1 0x57d64b6f 0x989938d9 0x72112d8c

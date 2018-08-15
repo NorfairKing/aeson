@@ -1,0 +1,10 @@
+resolver: lts-12.6
+packages:
+- '.'
+extra-deps:
+  - git: git@github.com:NorfairKing/scientific.git
+    commit: 7bed869ff1d6eb5389d7cde54df8a1b1c3b89627
+  - git: git@github.com:NorfairKing/attoparsec.git
+    commit: 2e8599e916df506e1689346743854ca6a7562e33
+  - hashable-time-0.2.0.1@sha256:46aba0e063b7719be3fc0ebdac4a338a165ddcc02ff8acb19548bef166076467
+
