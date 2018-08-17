@@ -113,6 +113,7 @@ module Data.Aeson
     , withObject
     , withText
     , withArray
+    , withBoundedScientific
     , withScientific
     , withBool
     , withEmbeddedJSON
@@ -133,7 +134,7 @@ module Data.Aeson
 import Prelude ()
 import Prelude.Compat
 
-import Data.Aeson.Types.FromJSON (ifromJSON)
+import Data.Aeson.Types.FromJSON (ifromJSON, withBoundedScientific)
 import Data.Aeson.Encoding (encodingToLazyByteString)
 import Data.Aeson.Parser.Internal (decodeWith, decodeStrictWith, eitherDecodeWith, eitherDecodeStrictWith, jsonEOF, json, jsonEOF', json')
 import Data.Aeson.Types
